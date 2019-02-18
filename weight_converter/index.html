@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <title>Weight Converter</title>
+  <style>
+    body {
+      margin-top: 70px;
+      background: #333;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <h3 class="display-4 text-center mb-3">Weight Converter</h3>
+        <form>
+          <div class="form-group">
+            <input type="number"
+            id="lbsInput"
+            class="form-control form-control-lg" placeholder="Enter pounds...">
+            <select id="weightSelector" class="form-control form-control-sm">
+              <option value="lbs">pounds</option>
+              <option value="kg">kilograms</option>
+              <option value="g">grams</option>
+              <option value="oz">ounces</option>
+            </select>
+          </div>
+        </form>
+        <div id="output">
+          <div class="card bg-primary mb-2">
+            <div class="card-block">
+              <h4>Grams</h4>
+              <div id="gramsOutput"></div>
+            </div>
+          </div>
+
+          <div class="card bg-success mb-2">
+            <div class="card-block">
+              <h4>Kilograms</h4>
+              <div id="kgOutput"></div>
+            </div>
+          </div>
+
+          <div class="card bg-warning mb-2">
+            <div class="card-block">
+              <h4>Ounces</h4>
+              <div id="ozOutput"></div>
+            </div>
+          </div>
+
+          <div class="card bg-danger mb-2">
+            <div class="card-block">
+              <h4>Pounds</h4>
+              <div id="lbsOutput"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    document.getElementById('output').style.visibility = 'hidden';
+    const input = document.getElementById("lbsInput")
+
+    input.addEventListener('input', (e) => {
+      document.getElementById('output').style.visibility = 'visible';
+
+      let amount = e.target.value;
+      let weight = document.getElementById('weightSelector')
+      weight = weight.options[weight.selectedIndex].value;
+
+      if (weight === 'lbs') {
+        document.getElementById('lbsOutput').innerHTML = amount;
+        document.getElementById('gramsOutput').innerHTML = amount / 0.0022046;
+        document.getElementById('kgOutput').innerHTML = amount / 2.2046;
+        document.getElementById('ozOutput').innerHTML = amount * 16;
+      } else if (weight === 'kg') {
+        document.getElementById('lbsOutput').innerHTML = amount / 0.45359237;
+        document.getElementById('gramsOutput').innerHTML = amount * 1000;
+        document.getElementById('kgOutput').innerHTML = amount;
+        document.getElementById('ozOutput').innerHTML = amount / 0.02834952;
+      } else if (weight === 'g') {
+        document.getElementById('lbsOutput').innerHTML = amount / 453.59237;
+        document.getElementById('gramsOutput').innerHTML = amount;
+        document.getElementById('kgOutput').innerHTML = amount * 1000;
+        document.getElementById('ozOutput').innerHTML = amount / 28.34952;
+      } else if (weight === 'oz') {
+        document.getElementById('lbsOutput').innerHTML = amount / 16;
+        document.getElementById('gramsOutput').innerHTML = amount * 28.34952;
+        document.getElementById('kgOutput').innerHTML = amount * 0.02834952;
+        document.getElementById('ozOutput').innerHTML = amount;
+      }
+    })
+  </script>
+</body>
+</html>
